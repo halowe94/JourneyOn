@@ -1,0 +1,6 @@
+.translucent-form-overlay {
+    background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.2);
+    width: 80%;
+  }
