@@ -15,18 +15,16 @@
         <div class="hero-search-filter-content">
             <p class="title">JourneyOn</p>
             <p></p>
-            <form class="hero-search-filter-form" action="">
-            <!-- <label for="findtext">Find</label>
-            <input id="findtext" class="hero-search-filter-form-find" type="text" />
-            <div class="divider">&nbsp;</div> -->
-            <label for="findlocate">City</label>
-            <input id="findlocate" class="hero-search-filter-form-near" type="text" />
-            <button class="button"><i class="fa fa-search"></i></button>
+            <!-- SEARCH CITY -->
+            <form id="searchForm" class="hero-search-filter-form" action="">
+                <label for="cityName">City</label>
+                <input id="cityName" class="hero-search-filter-form-near" type="text" />
+                <!-- <button id="searchCity" class="button"><i class="fa fa-search"></i></button> -->
             </form>
             <ul class="hero-search-filter-menu menu align-center">
             <li><a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurants</a></li>
-            <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i> Weather</a></li>
-            <li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i> Translate</a></li>
+            <li><a id="searchCity" href="#"><i class="fa fa-cloud" aria-hidden="true"></i> Weather</a></li>
+            <li><a id="translateTab" href="#"><i class="fa fa-comments" aria-hidden="true"></i> Translate</a></li>
             </ul>
         </div>
     </header>
@@ -35,11 +33,11 @@
         <!-- We can now combine rows and columns when there's only one column in that row -->
         <div class="row medium-8 large-7 columns">
             <!-- SEARCH -->
-            <form id="searchForm">
+            <!-- <form id="searchForm">
                 <h1>Search for a City:</h1>
                 <input id="cityName" type="text"><br>
                 <a id="searchCity" class="button">Search</a>
-            </form>
+            </form> -->
 
             <!-- WEATHER -->
             <div id="currContainer">

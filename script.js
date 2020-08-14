@@ -1,15 +1,19 @@
+$("#currContainer").hide();
+$("#translateForm").hide();
+
 // WEATHER
 var forecastContainer = document.getElementById("forecastContainer");
 var current = document.getElementById("currentWeather");
 var forecast = document.getElementById("forecastWeather");
-$("#currContainer").hide();
 
 $("#searchCity").on("click", function(event) {
     event.preventDefault();
     
     var cityName = $("#cityName").val().trim();
     
+    $("#translateForm").hide();
     $("#currContainer").show();
+
     $("#currentWeather").empty();
     currentWeather(cityName);
     forecastWeather(cityName);
@@ -36,6 +40,13 @@ function currentWeather(cityName) {
 // TRANSLATE
 var translateContainer = document.getElementById("translateContainer");
 var translateResult = document.getElementById("translateResult");
+
+$("#translateTab").on("click", function(event) {
+    event.preventDefault();
+    
+    $("#currContainer").hide();
+    $("#translateForm").show();
+});
 
 $("#translateText").on("click", function(event) {
     event.preventDefault();
