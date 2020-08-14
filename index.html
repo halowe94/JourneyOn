@@ -33,24 +33,38 @@
 
     <!--Container with Transluscent Overlay-->
     <div class="translucent-form-overlay">
+        <!-- We can now combine rows and columns when there's only one column in that row -->
+        <div class="row medium-8 large-7 columns">
+            <!-- SEARCH -->
+            <form id="searchForm">
+                <h1>Search for a City:</h1>
+                <input id="cityName" type="text"><br>
+                <a id="searchCity" class="button">Search</a>
+            </form>
 
-    <!-- We can now combine rows and columns when there's only one column in that row -->
-    <div class="row medium-8 large-7 columns">
-        <form id="searchForm">
-            <h1>Search for a City:</h1>
-            <input id="cityName" type="text"><br>
-            <a id="searchCity" class="button">Search</a>
-        </form>
-
-        <div id="currContainer">
-            <div id="currentWeather">
+            <!-- WEATHER -->
+            <div id="currContainer">
+                <div id="currentWeather">
+                </div>
             </div>
-          </div>
-        <div id="forecastContainer">
-            <!-- <h1>5-Day Forecast</h1> -->
-            <div id="forecastWeather">
+            <div id="forecastContainer">
+                <!-- <h1>5-Day Forecast</h1> -->
+                <div id="forecastWeather">
+                </div>
             </div>
 
+            <!-- TRANSLATE -->
+            <form id="translateForm">
+                <h1>Translator:</h1>
+                <input id="translateInput" type="text"><br>
+                <div id="translateContainer">
+                    <div id="translateResult">
+                    </div>
+                </div>
+                <a id="translateText" class="button">Translate</a>
+            </form>
+
+            
             <div class="blog-post">
                 <h3>Awesome blog post title <small>3/6/2015</small></h3>
                 <img class="thumbnail" src="https://placehold.it/850x350">
