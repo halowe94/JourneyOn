@@ -13,25 +13,62 @@
 <body>
     <header class="hero-search-filter">
         <div class="hero-search-filter-content">
-          <p class="title">JourneyOn</p>
-          <p></p>
-          <form class="hero-search-filter-form" action="">
-            <label for="findtext">Find</label>
+            <p class="title">JourneyOn</p>
+            <p></p>
+            <form class="hero-search-filter-form" action="">
+            <!-- <label for="findtext">Find</label>
             <input id="findtext" class="hero-search-filter-form-find" type="text" />
-            <div class="divider">&nbsp;</div>
-            <label for="findlocate">Near</label>
+            <div class="divider">&nbsp;</div> -->
+            <label for="findlocate">City</label>
             <input id="findlocate" class="hero-search-filter-form-near" type="text" />
             <button class="button"><i class="fa fa-search"></i></button>
-          </form>
-          <ul class="hero-search-filter-menu menu align-center">
+            </form>
+            <ul class="hero-search-filter-menu menu align-center">
             <li><a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurants</a></li>
             <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i> Weather</a></li>
             <li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i> Translate</a></li>
-          </ul>
+            </ul>
         </div>
-      </header>
-    
+    </header>
+    <!--Container with Transluscent Overlay-->
+    <div class="translucent-form-overlay">
+        <!-- We can now combine rows and columns when there's only one column in that row -->
+        <div class="row medium-8 large-7 columns">
+            <!-- SEARCH -->
+            <form id="searchForm">
+                <h1>Search for a City:</h1>
+                <input id="cityName" type="text"><br>
+                <a id="searchCity" class="button">Search</a>
+            </form>
 
-    
+            <!-- WEATHER -->
+            <div id="currContainer">
+                <div id="currentWeather">
+                </div>
+            </div>
+            <div id="forecastContainer">
+                <!-- <h1>5-Day Forecast</h1> -->
+                <div id="forecastWeather">
+                </div>
+            </div>
+
+            <!-- TRANSLATE -->
+            <form id="translateForm">
+                <h1>Translator:</h1>
+                <input id="translateInput" type="text"><br>
+                <div id="translateContainer">
+                    <div id="translateResult">
+                    </div>
+                </div>
+                <a id="translateText" class="button">Translate</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
