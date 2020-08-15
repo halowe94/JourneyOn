@@ -139,14 +139,21 @@ html {
 
 
 
-
 .translucent-form-overlay {
     background:rgb(0,0,0);
     background: transparent\9;
     background:rgba(0,0,0,0.2);
     width: 80%;
   }
+#contentContainer {
+  width: 90%;
+  margin: auto;
+}
 #currContainer {
-    background-color: rgb(217, 234, 238);
+    /* background-color: rgb(217, 234, 238); */
     padding: 20px;
+}
+#translateForm {
+  padding: 20px;
+  line-height: 0em;
 }

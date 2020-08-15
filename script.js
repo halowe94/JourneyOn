@@ -1,15 +1,19 @@
+$("#currContainer").hide();
+$("#translateForm").hide();
+
 // WEATHER
 var forecastContainer = document.getElementById("forecastContainer");
 var current = document.getElementById("currentWeather");
 var forecast = document.getElementById("forecastWeather");
-$("#currContainer").hide();
 
 $("#searchCity").on("click", function(event) {
     event.preventDefault();
     
     var cityName = $("#cityName").val().trim();
     
+    $("#translateForm").hide();
     $("#currContainer").show();
+
     $("#currentWeather").empty();
     currentWeather(cityName);
     forecastWeather(cityName);
@@ -36,15 +40,41 @@ function currentWeather(cityName) {
 // TRANSLATE
 var translateContainer = document.getElementById("translateContainer");
 var translateResult = document.getElementById("translateResult");
+var language = "es";
+
+$("#translateTab").on("click", function(event) {
+    event.preventDefault();
+    
+    $("#currContainer").hide();
+    $("#translateForm").show();
+});
 
 $("#translateText").on("click", function(event) {
     event.preventDefault();
     
     var translateInput = $("#translateInput").val().trim();
     
-    $("#translatedResult").empty();
+    $("#translateResult").empty();
     translateText(translateInput);
 });
+
+$(".language").on("click", function(event) {
+    event.preventDefault();
+
+    // console.log(this.text);
+    if (this.text == "Spanish") {
+        language = "es";
+    }
+    else if (this.text == "French") {
+        language = "fr"
+    }
+    else if (this.text == "German") {
+        language = "de"
+    }
+    else if (this.text == "Chinese") {
+        language = "zh-CN"
+    }
+})
 
 function translateText(translateInput) {
     var settings = {
@@ -61,7 +91,7 @@ function translateText(translateInput) {
         "data": {
             "source": "en",
             "q": translateInput,
-            "target": "es"
+            "target": language
         }
     }
     
