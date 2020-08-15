@@ -16,7 +16,7 @@ $("#searchCity").on("click", function(event) {
 
     $("#currentWeather").empty();
     currentWeather(cityName);
-    forecastWeather(cityName);
+    // forecastWeather(cityName);
 });
 
 function currentWeather(cityName) {
