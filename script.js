@@ -73,6 +73,7 @@ function translateText(translateInput) {
     });
 }
 
+
 //RESTUARANT API CODE
 
 //Typeahead settings
@@ -99,7 +100,7 @@ var nameSettings = {
 $.ajax(nameSettings).done(function (response) {
     console.log(response);
     //location_id
-    console.log(response.results.data[0].result_object.location_id);
+    console.log("location id: " + response.results.data[0].result_object.location_id);
 });
 //end Typehead settings
 
@@ -125,12 +126,14 @@ var searchSettings = {
 	}
 }
 
+//for loop goes here
+for ( let i = 0; i < 5; i++) {
 $.ajax(searchSettings).done(function (response) {
     console.log(response);
-    console.log(response.results.data[0].name);
-    console.log(response.results.data[0].address);
-    console.log(response.results.data[0].photo.images.small);
-    console.log(response.results.data[0].rating);
+    console.log(response.results.data[i].name);
+    console.log(response.results.data[i].address);
+    console.log(response.results.data[i].photo.images.small);
+    console.log(response.results.data[i].rating);
 
 });
 //end searchSettings
@@ -156,11 +159,18 @@ var photoSettings = {
 }
 
 $.ajax(photoSettings).done(function (response) {
-    console.log(response);
-    let image= $('<img>');
+	console.log(response);
+	let image= $('<img>');
 	image.attr("src", response.url);
 	console.log("Photo: " + response.url);
 	//MUST CHANGE SOME ELEMENT TO ACTUAL ELEMENT!!!!
 	image.appendTo('someElement');
+
+
+
+	
 });
 //end photoSettings
+
+}
+//end for loop
