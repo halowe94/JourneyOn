@@ -102,3 +102,105 @@ function translateText(translateInput) {
         $("<p>" + response.data.translations[0].translatedText + "</p>").appendTo(translateResult);
     });
 }
+
+
+//RESTUARANT API CODE
+
+//Typeahead settings
+//variable is q
+let cityName = "";
+
+var nameSettings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://worldwide-restaurants.p.rapidapi.com/typeahead",
+	"method": "POST",
+	"headers": {
+		"x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+		"x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+		"content-type": "application/x-www-form-urlencoded"
+	},
+	"data": {
+		"language": "en_US",
+        //will be cityName, but need an actual city as a variable
+        "q": "Sacramento",
+	}
+}
+
+$.ajax(nameSettings).done(function (response) {
+    console.log(response);
+    //location_id
+    console.log("location id: " + response.results.data[0].result_object.location_id);
+});
+//end Typehead settings
+
+//output from loaction_id will populate the search for restaurants
+let locationID = "";
+
+var searchSettings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://worldwide-restaurants.p.rapidapi.com/search",
+	"method": "POST",
+	"headers": {
+		"x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+		"x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+		"content-type": "application/x-www-form-urlencoded"
+	},
+	"data": {
+		"limit": "30",
+        "language": "en_US",
+        //this will be locationID variable
+		"location_id": "32999",
+		"currency": "USD"
+	}
+}
+
+//for loop goes here
+for ( let i = 0; i < 5; i++) {
+$.ajax(searchSettings).done(function (response) {
+    console.log(response);
+    console.log(response.results.data[i].name);
+    console.log(response.results.data[i].address);
+    //console.log(response.results.data[i].photo.images.small);
+    console.log(response.results.data[i].rating);
+
+});
+//end searchSettings
+
+//begin photoSettings
+var photoSettings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://worldwide-restaurants.p.rapidapi.com/photos",
+	"method": "POST",
+	"headers": {
+		"x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+		"x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+		"content-type": "application/x-www-form-urlencoded"
+	},
+	"data": {
+        "language": "en_US",
+        //this will be locationID
+		"location_id": "32999",
+		"currency": "USD",
+		"limit": "15"
+	}
+}
+
+$.ajax(photoSettings).done(function (response) {
+	console.log(response);
+	let image= $('<img>');
+	image.attr("src", response.url);
+	console.log("Photo: " + response.url);
+	//MUST CHANGE SOME ELEMENT TO ACTUAL ELEMENT!!!!
+	image.appendTo('someElement');
+
+
+
+	
+});
+//end photoSettings
+
+}
+//end for loop
