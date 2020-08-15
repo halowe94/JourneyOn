@@ -132,7 +132,7 @@ $.ajax(searchSettings).done(function (response) {
     console.log(response);
     console.log(response.results.data[i].name);
     console.log(response.results.data[i].address);
-    console.log(response.results.data[i].photo.images.small);
+    //console.log(response.results.data[i].photo.images.small);
     console.log(response.results.data[i].rating);
 
 });
