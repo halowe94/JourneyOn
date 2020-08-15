@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+
+    <!-- <script src="/js/vendor/modernizr.js"></script> -->
 </head>
 <body>
     <header class="hero-search-filter">
@@ -29,9 +31,10 @@
         </div>
     </header>
     <!--Container with Transluscent Overlay-->
-    <div class="translucent-form-overlay">
+    <!-- <div class="translucent-form-overlay"> -->
         <!-- We can now combine rows and columns when there's only one column in that row -->
-        <div class="row medium-8 large-7 columns">
+        <!-- <div class="row medium-8 large-7 columns"> -->
+        <div id="contentContainer">
             <!-- SEARCH -->
             <!-- <form id="searchForm">
                 <h1>Search for a City:</h1>
@@ -53,6 +56,17 @@
             <!-- TRANSLATE -->
             <form id="translateForm">
                 <h1>Translator:</h1>
+                <!-- <ul class="dropdown menu" data-dropdown-menu>
+                    <li>
+                        <a href="#">Language</a> -->
+                        <ul class="menu">
+                            <li><a href="#" class="language">Spanish</a></li>
+                            <li><a href="#" class="language">French</a></li>
+                            <li><a href="#" class="language">German</a></li>
+                            <li><a href="#" class="language">Chinese</a></li>
+                        </ul>
+                    <!-- </li>
+                </ul> -->
                 <input id="translateInput" type="text"><br>
                 <div id="translateContainer">
                     <div id="translateResult">
@@ -61,11 +75,24 @@
                 <a id="translateText" class="button">Translate</a>
             </form>
         </div>
-    </div>
+    <!-- </div> -->
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <!-- <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.dropdownMenu.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.util.keyboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.util.box.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.util.nest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.util.touch.min.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+    
+    
     <script src="script.js"></script>
 
 </body>

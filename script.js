@@ -40,6 +40,7 @@ function currentWeather(cityName) {
 // TRANSLATE
 var translateContainer = document.getElementById("translateContainer");
 var translateResult = document.getElementById("translateResult");
+var language = "es";
 
 $("#translateTab").on("click", function(event) {
     event.preventDefault();
@@ -53,9 +54,27 @@ $("#translateText").on("click", function(event) {
     
     var translateInput = $("#translateInput").val().trim();
     
-    $("#translatedResult").empty();
+    $("#translateResult").empty();
     translateText(translateInput);
 });
+
+$(".language").on("click", function(event) {
+    event.preventDefault();
+
+    // console.log(this.text);
+    if (this.text == "Spanish") {
+        language = "es";
+    }
+    else if (this.text == "French") {
+        language = "fr"
+    }
+    else if (this.text == "German") {
+        language = "de"
+    }
+    else if (this.text == "Chinese") {
+        language = "zh-CN"
+    }
+})
 
 function translateText(translateInput) {
     var settings = {
@@ -72,7 +91,7 @@ function translateText(translateInput) {
         "data": {
             "source": "en",
             "q": translateInput,
-            "target": "es"
+            "target": language
         }
     }
     
