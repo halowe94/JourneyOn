@@ -156,6 +156,11 @@ var photoSettings = {
 }
 
 $.ajax(photoSettings).done(function (response) {
-	console.log(response);
+    console.log(response);
+    let image= $('<img>');
+	image.attr("src", response.url);
+	console.log("Photo: " + response.url);
+	//MUST CHANGE SOME ELEMENT TO ACTUAL ELEMENT!!!!
+	image.appendTo('someElement');
 });
 //end photoSettings
