@@ -106,9 +106,16 @@ function translateText(translateInput) {
 
 //RESTUARANT API CODE
 
+//Click function
+// $("#translateTab").on("click", function(event) {
+//     event.preventDefault();
+    
+//     $("#currContainer").hide();
+//     $("#translateForm").show();
+// });
+
 //Typeahead settings
 //variable is q
-let cityName = "";
 
 var nameSettings = {
 	"async": true,
@@ -123,7 +130,7 @@ var nameSettings = {
 	"data": {
 		"language": "en_US",
         //will be cityName, but need an actual city as a variable
-        "q": "Sacramento",
+        "q": cityName,
 	}
 }
 
@@ -135,7 +142,7 @@ $.ajax(nameSettings).done(function (response) {
 //end Typehead settings
 
 //output from loaction_id will populate the search for restaurants
-let locationID = "";
+let locationID = response.results.data[0].result_object.location_id;
 
 var searchSettings = {
 	"async": true,
@@ -189,9 +196,9 @@ var photoSettings = {
 }
 
 $.ajax(photoSettings).done(function (response) {
-	console.log(response);
+	console.log(response.results.data[0].images.small.url);
 	let image= $('<img>');
-	image.attr("src", response.url);
+	image.attr("src", response.results.data[0].images.small.url);
 	console.log("Photo: " + response.url);
 	//MUST CHANGE SOME ELEMENT TO ACTUAL ELEMENT!!!!
 	image.appendTo('someElement');
