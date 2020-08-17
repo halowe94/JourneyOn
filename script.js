@@ -72,8 +72,14 @@ $(".language").on("click", function(event) {
     else if (this.text == "German") {
         language = "de"
     }
+    else if (this.text == "Italian") {
+        language = "it"
+    }
     else if (this.text == "Chinese") {
         language = "zh-CN"
+    }
+    else if (this.text == "Korean") {
+        language = "ko"
     }
 })
 
