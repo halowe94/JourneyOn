@@ -34,7 +34,7 @@ html {
     font-family: 'Lily Script One', cursive;
     font-size: 75px;
     font-weight: lighter;
-    
+    color: white;
     }
     
   
@@ -146,9 +146,6 @@ html {
     box-shadow: none;
   }
 
-
-
-
 .translucent-form-overlay {
     background:rgb(0,0,0);
     background: transparent\9;
@@ -156,15 +153,26 @@ html {
     width: 80%;
   }
 #contentContainer {
+  position: absolute;
   width: 90%;
   margin: auto;
+  left: 50%;
 }
 #currContainer {
-    /* background-color: rgb(217, 234, 238); */
-    padding: 20px;
+  background-color: rgb(217, 234, 238);
+  /* background-color: white; */
+  padding: 30px;
+  border-radius: 25px;
+  position: relative;
+  left: -50%;
 }
 #translateForm {
-  padding: 20px;
+  /* background-color: rgb(217, 234, 238); */
+  background-color: white;
+  padding: 30px;
+  border-radius: 25px;
+  position: relative;
+  left: -50%;
   line-height: 0em;
 }
 
