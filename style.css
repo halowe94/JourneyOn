@@ -1,5 +1,10 @@
 html { 
-    background: url("https://source.unsplash.com/collection/148531/1600x900") no-repeat center center fixed; 
+    background: url("https://source.unsplash.com/collection/148531/1600x900") no-repeat center center fixed;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url("https://source.unsplash.com/collection/148531/1600x900");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -9,6 +14,11 @@ html {
 
   .hero-search-filter {
     background: url("https://source.unsplash.com/collection/148531/1600x900")no-repeat center center fixed;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url("https://source.unsplash.com/collection/148531/1600x900");
     height: 300px;
     border: transparent;
     background-size: cover;
