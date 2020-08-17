@@ -1,5 +1,6 @@
 $("#currContainer").hide();
 $("#translateForm").hide();
+$("#resContainer").hide();
 
 // WEATHER
 var forecastContainer = document.getElementById("forecastContainer");
@@ -106,11 +107,19 @@ function translateText(translateInput) {
 
 //RESTUARANT API CODE
 
+//Click function
+ $("#restaurantTab").on("click", function(event) {
+     event.preventDefault();
+    
+     $("#restaurantTab").show();
+     $("#currContainer").hide();
+     $("#translateForm").hide();
+ });
+
 //Typeahead settings
 //variable is q
-let cityName = "";
 
-var nameSettings = {
+var nameSettings = { 
 	"async": true,
 	"crossDomain": true,
 	"url": "https://worldwide-restaurants.p.rapidapi.com/typeahead",
@@ -121,8 +130,8 @@ var nameSettings = {
 		"content-type": "application/x-www-form-urlencoded"
 	},
 	"data": {
-		"language": "en_US",
-        //will be cityName, but need an actual city as a variable
+        "language": "en_US",
+        //will be cityName
         "q": "Sacramento",
 	}
 }
@@ -135,7 +144,9 @@ $.ajax(nameSettings).done(function (response) {
 //end Typehead settings
 
 //output from loaction_id will populate the search for restaurants
-let locationID = "";
+//THERE IS AN ISSUE WITH LOCATION ID
+let locationID = response.results.data[0].result_object.location_id;
+console.log(locationID);
 
 var searchSettings = {
 	"async": true,
@@ -150,8 +161,7 @@ var searchSettings = {
 	"data": {
 		"limit": "30",
         "language": "en_US",
-        //this will be locationID variable
-		"location_id": "32999",
+		"location_id": locationID,
 		"currency": "USD"
 	}
 }
@@ -162,7 +172,6 @@ $.ajax(searchSettings).done(function (response) {
     console.log(response);
     console.log(response.results.data[i].name);
     console.log(response.results.data[i].address);
-    //console.log(response.results.data[i].photo.images.small);
     console.log(response.results.data[i].rating);
 
 });
@@ -181,20 +190,17 @@ var photoSettings = {
 	},
 	"data": {
         "language": "en_US",
-        //this will be locationID
-		"location_id": "32999",
+		"location_id": locationID,
 		"currency": "USD",
 		"limit": "15"
 	}
 }
 
 $.ajax(photoSettings).done(function (response) {
-	console.log(response);
+	console.log(response.results.data[0].images.small.url);
 	let image= $('<img>');
-	image.attr("src", response.url);
-	console.log("Photo: " + response.url);
-	//MUST CHANGE SOME ELEMENT TO ACTUAL ELEMENT!!!!
-	image.appendTo('someElement');
+	image.attr("src", response.results.data[0].images.small.url);
+	image.appendTo('#restaurants');
 
 
 
@@ -202,5 +208,5 @@ $.ajax(photoSettings).done(function (response) {
 });
 //end photoSettings
 
-}
+};
 //end for loop
