@@ -113,22 +113,31 @@ function translateText(translateInput) {
 
 //RESTUARANT API CODE
 
-//Click function
+//restaurant Click function
 $("#restaurantTab").on("click", function(event) {
-	event.preventDefault();
+    event.preventDefault();
    
 	$("#restaurantTab").show();
 	$("#currContainer").hide();
 	$("#translateForm").hide();
 });
 
+$("#restaurantTab").on("click", function(event) {
+    event.preventDefault();
+    
+    var cityName = $("#cityName").val().trim();
+    //set the city name in local storage
+    localStorage.setItem("City Name", JSON.stringify(cityName));
+});
+
+//variable for City Name in local storage
+let cityInput = JSON.parse(localStorage.getItem('City Name'));
+console.log(cityInput);
+
 //Location Global Variable
 let locationID = "";
 
 //Typeahead settings
-//variable is q
-
-
 var nameSettings = { 
    "async": true,
    "crossDomain": true,
@@ -142,7 +151,7 @@ var nameSettings = {
    "data": {
 	   "language": "en_US",
 	   //will be cityName
-	   "q": "Sacramento",
+	   "q": cityInput,
    }
 }
 
@@ -153,14 +162,14 @@ $.ajax(nameSettings).done(function (response) {
    locationID = response.results.data[0].result_object.location_id;
    console.log("test " + locationID);
    //set location in local storage
-   localStorage.setItem("location", JSON.stringify(locationID));
+   localStorage.setItem("location ID", JSON.stringify(locationID));
 });
 //end Typehead settings
 
 //grab and parse object from local storage
-var locationIdValue = JSON.parse(localStorage.getItem('location'));
+var locationIdValue = JSON.parse(localStorage.getItem('location ID'));
 let locationIdInput = parseInt(locationIdValue);
-console.log("antotha one " + typeof parseInt(locationIdValue)) ;
+console.log("anotha one " + typeof parseInt(locationIdValue)) ;
 
 //searchSettings
 var searchSettings = {
