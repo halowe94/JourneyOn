@@ -1,12 +1,13 @@
 $("#currContainer").hide();
+$("#forecastContainer").hide();
 $("#translateForm").hide();
 $("#resContainer").hide();
 $("#restuarants").hide();
 
 // WEATHER
-var forecastContainer = document.getElementById("forecastContainer");
 var current = document.getElementById("currentWeather");
 var forecast = document.getElementById("forecastWeather");
+var forecastContainer = document.getElementById("forecastContainer");
 
 $("#searchCity").on("click", function(event) {
     event.preventDefault();
@@ -14,11 +15,14 @@ $("#searchCity").on("click", function(event) {
     var cityName = $("#cityName").val().trim();
     
     $("#translateForm").hide();
+    $("#resContainer").hide();
     $("#currContainer").show();
+    $("#forecastContainer").show();
 
     $("#currentWeather").empty();
+    $("#forecastWeather").empty();
     currentWeather(cityName);
-    // forecastWeather(cityName);
+    forecastWeather(cityName);
 });
 
 function currentWeather(cityName) {
@@ -38,6 +42,58 @@ function currentWeather(cityName) {
     });
 }
 
+function forecastWeather(cityName) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=cc1d7110e10d9b9390a02a70dc1628f5"
+    
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        var srcLink1 = "https://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png"
+        var srcLink2 = "https://openweathermap.org/img/wn/" + response.list[1].weather[0].icon + "@2x.png"
+        var srcLink3 = "https://openweathermap.org/img/wn/" + response.list[2].weather[0].icon + "@2x.png"
+        var srcLink4 = "https://openweathermap.org/img/wn/" + response.list[3].weather[0].icon + "@2x.png"
+        var srcLink5 = "https://openweathermap.org/img/wn/" + response.list[4].weather[0].icon + "@2x.png"
+        
+        // console.log(response);
+
+        $("<div class='forecastDivs' id='plusOne'>"+"</div>").appendTo(forecast);
+        var plusOne = $("#plusOne")
+        $("<h3>" + moment().add(1, 'days').format('l') + "</h3>").appendTo(plusOne);
+        $("#plusOne").append('<img id="iconOne" src="' + srcLink1 + '" />')
+        $("<p>" + "Temp: " + (response.list[0].main.temp * 9 / 5 - 459.67).toFixed(1) + " °F" + "</p>").appendTo(plusOne);
+        $("<p>" + "Humidity: " + response.list[0].main.humidity + "%" + "</p>").appendTo(plusOne);
+
+        $("<div class='forecastDivs' id='plusTwo'>"+"</div>").appendTo(forecast);
+        var plusTwo = $("#plusTwo")
+        $("<h3>" + moment().add(2, 'days').format('l') + "</h3>").appendTo(plusTwo);
+        $("#plusTwo").append('<img id="iconTwo" src="' + srcLink2 + '" />')
+        $("<p>" + "Temp: " + (response.list[1].main.temp * 9 / 5 - 459.67).toFixed(1) + " °F" + "</p>").appendTo(plusTwo);
+        $("<p>" + "Humidity: " + response.list[1].main.humidity + "%" + "</p>").appendTo(plusTwo);
+
+        $("<div class='forecastDivs' id='plusThree'>"+"</div>").appendTo(forecast);
+        var plusThree = $("#plusThree")
+        $("<h3>" + moment().add(3, 'days').format('l') + "</h3>").appendTo(plusThree);
+        $("#plusThree").append('<img id="iconThree" src="' + srcLink3 + '" />')
+        $("<p>" + "Temp: " + (response.list[2].main.temp * 9 / 5 - 459.67).toFixed(1) + " °F" + "</p>").appendTo(plusThree);
+        $("<p>" + "Humidity: " + response.list[2].main.humidity + "%" + "</p>").appendTo(plusThree);
+
+        $("<div class='forecastDivs' id='plusFour'>"+"</div>").appendTo(forecast);
+        var plusFour = $("#plusFour")
+        $("<h3>" + moment().add(4, 'days').format('l') + "</h3>").appendTo(plusFour);
+        $("#plusFour").append('<img id="iconFour" src="' + srcLink4 + '" />')
+        $("<p>" + "Temp: " + (response.list[3].main.temp * 9 / 5 - 459.67).toFixed(1) + " °F" + "</p>").appendTo(plusFour);
+        $("<p>" + "Humidity: " + response.list[3].main.humidity + "%" + "</p>").appendTo(plusFour);
+
+        $("<div class='forecastDivs' id='plusFive'>"+"</div>").appendTo(forecast);
+        var plusFive = $("#plusFive")
+        $("<h3>" + moment().add(5, 'days').format('l') + "</h3>").appendTo(plusFive);
+        $("#plusFive").append('<img id="iconFive" src="' + srcLink5 + '" />')
+        $("<p>" + "Temp: " + (response.list[4].main.temp * 9 / 5 - 459.67).toFixed(1) + " °F" + "</p>").appendTo(plusFive);
+        $("<p>" + "Humidity: " + response.list[4].main.humidity + "%" + "</p>").appendTo(plusFive);
+    });
+}
+
 
 // TRANSLATE
 var translateContainer = document.getElementById("translateContainer");
@@ -48,6 +104,8 @@ $("#translateTab").on("click", function(event) {
     event.preventDefault();
     
     $("#currContainer").hide();
+    $("#forecastContainer").hide();
+    $("#resContainer").hide();
     $("#translateForm").show();
 });
 
@@ -92,7 +150,7 @@ function translateText(translateInput) {
         "method": "POST",
         "headers": {
             "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-            "x-rapidapi-key": "12d5ec1238msh592efbbc1c917e7p1b499ejsnc4830fc60542",
+            "x-rapidapi-key": "2b07b6ec73mshd7f568f32fa4427p1efeb3jsnf11a6a1c6510",
             "accept-encoding": "application/gzip",
             "content-type": "application/x-www-form-urlencoded"
         },
@@ -102,6 +160,10 @@ function translateText(translateInput) {
             "target": language
         }
     }
+    
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
     
     $.ajax(settings).done(function (response) {
         console.log(response);
@@ -120,7 +182,8 @@ $("#restaurantTab").on("click", function(event) {
    
     $("#resContainer").show();
     $("#restuarants").show();
-	$("#currContainer").hide();
+    $("#currContainer").hide();
+    $("#forecastContainer").hide();
     $("#translateForm").hide();
     
     //grab and parse object from local storage

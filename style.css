@@ -166,6 +166,21 @@ html {
   position: relative;
   left: -50%;
 }
+#forecastContainer {
+  background-color: rgb(218, 218, 218);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 25px;
+  position: relative;
+  left: -50%;
+}
+#forecastWeather {
+  display: flex;
+}
+.forecastDivs {
+  padding: 15px;
+}
 #translateForm {
   /* background-color: rgb(217, 234, 238); */
   background-color: white;
