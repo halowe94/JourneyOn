@@ -1,6 +1,7 @@
 $("#currContainer").hide();
 $("#translateForm").hide();
 $("#resContainer").hide();
+$("#restuarants").hide();
 
 // WEATHER
 var forecastContainer = document.getElementById("forecastContainer");
@@ -113,106 +114,128 @@ function translateText(translateInput) {
 
 //RESTUARANT API CODE
 
-//Click function
- $("#restaurantTab").on("click", function(event) {
-     event.preventDefault();
+//restaurant Click function
+$("#restaurantTab").on("click", function(event) {
+    event.preventDefault();
+   
+    $("#resContainer").show();
+    $("#restuarants").show();
+	$("#currContainer").hide();
+    $("#translateForm").hide();
     
-     $("#restaurantTab").show();
-     $("#currContainer").hide();
-     $("#translateForm").hide();
- });
+    //grab and parse object from local storage
+var locationIdValue = JSON.parse(localStorage.getItem('location ID'));
+let locationIdInput = parseInt(locationIdValue);
+console.log("anotha one " + typeof parseInt(locationIdValue)) ;
 
-//Typeahead settings
-//variable is q
-
-var nameSettings = { 
-	"async": true,
-	"crossDomain": true,
-	"url": "https://worldwide-restaurants.p.rapidapi.com/typeahead",
-	"method": "POST",
-	"headers": {
-		"x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
-		"x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
-		"content-type": "application/x-www-form-urlencoded"
-	},
-	"data": {
-        "language": "en_US",
-        //will be cityName
-        "q": "Sacramento",
-	}
-}
-
-$.ajax(nameSettings).done(function (response) {
-    console.log(response);
-    //location_id
-    console.log("location id: " + response.results.data[0].result_object.location_id);
-});
-//end Typehead settings
-
-//output from loaction_id will populate the search for restaurants
-//THERE IS AN ISSUE WITH LOCATION ID
-let locationID = response.results.data[0].result_object.location_id;
-console.log(locationID);
-
+//searchSettings
 var searchSettings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://worldwide-restaurants.p.rapidapi.com/search",
-	"method": "POST",
-	"headers": {
-		"x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
-		"x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
-		"content-type": "application/x-www-form-urlencoded"
-	},
-	"data": {
-		"limit": "30",
-        "language": "en_US",
-		"location_id": locationID,
-		"currency": "USD"
-	}
+   "async": true,
+   "crossDomain": true,
+   "url": "https://worldwide-restaurants.p.rapidapi.com/search",
+   "method": "POST",
+   "headers": {
+	   "x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+	   "x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+	   "content-type": "application/x-www-form-urlencoded"
+   },
+   "data": {
+	   "limit": "30",
+	   "language": "en_US",
+	   "location_id": locationIdInput,
+	   "currency": "USD"
+   }
 }
 
 //for loop goes here
 for ( let i = 0; i < 5; i++) {
 $.ajax(searchSettings).done(function (response) {
+    if (response.results.errors && response.results.errors.length > 0) {return}
+    else{ 
     console.log(response);
-    console.log(response.results.data[i].name);
-    console.log(response.results.data[i].address);
-    console.log(response.results.data[i].rating);
+   console.log(response.results.data[i].name);
+   console.log(response.results.data[i].address);
+   console.log(response.results.data[i].rating);
+    }
+   
 
 });
 //end searchSettings
 
 //begin photoSettings
 var photoSettings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://worldwide-restaurants.p.rapidapi.com/photos",
-	"method": "POST",
-	"headers": {
-		"x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
-		"x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
-		"content-type": "application/x-www-form-urlencoded"
-	},
-	"data": {
-        "language": "en_US",
-		"location_id": locationID,
-		"currency": "USD",
-		"limit": "15"
-	}
+   "async": true,
+   "crossDomain": true,
+   "url": "https://worldwide-restaurants.p.rapidapi.com/photos",
+   "method": "POST",
+   "headers": {
+	   "x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+	   "x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+	   "content-type": "application/x-www-form-urlencoded"
+   },
+   "data": {
+	   "language": "en_US",
+	   "location_id": locationIdInput,
+	   "currency": "USD",
+	   "limit": "15"
+   }
 }
 
 $.ajax(photoSettings).done(function (response) {
-	console.log(response.results.data[0].images.small.url);
-	let image= $('<img>');
-	image.attr("src", response.results.data[0].images.small.url);
-	image.appendTo('#restaurants');
+   console.log(response.results.data[i].images.small.url);
+   let image= $('<img>');
+   image.attr("src", response.results.data[i].images.small.url);
+   image.appendTo('#restaurants');
 
 
 
-	
+   
 });
 //end photoSettings
 
 };
 //end for loop
+});
+
+function myFunction() {
+    var cityName = $("#cityName").val().trim();
+    //set the city name in local storage
+    localStorage.setItem('City Name', JSON.stringify(cityName));
+
+
+//variable for City Name in local storage
+let cityInput = JSON.parse(localStorage.getItem('City Name'));
+console.log(cityInput);
+
+//Location Global Variable
+let locationID = "";
+
+//Typeahead settings
+var nameSettings = { 
+   "async": true,
+   "crossDomain": true,
+   "url": "https://worldwide-restaurants.p.rapidapi.com/typeahead",
+   "method": "POST",
+   "headers": {
+	   "x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+	   "x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+	   "content-type": "application/x-www-form-urlencoded"
+   },
+   "data": {
+	   "language": "en_US",
+	   //will be cityName
+	   "q": cityInput,
+   }
+}
+
+$.ajax(nameSettings).done(function (response) {
+   console.log(response);
+   //location_id
+   console.log("location id: " + response.results.data[0].result_object.location_id);
+   locationID = response.results.data[0].result_object.location_id;
+   console.log("test " + locationID);
+   //set location in local storage
+   localStorage.setItem("location ID", JSON.stringify(locationID));
+});
+//end Typehead settings
+}

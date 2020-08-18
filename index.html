@@ -19,7 +19,7 @@
             <!-- SEARCH CITY -->
             <form id="searchForm" class="hero-search-filter-form" action="">
                 <label for="cityName">City</label>
-                <input id="cityName" class="hero-search-filter-form-near" type="text" />
+                <input id="cityName" oninput="myFunction()" class="hero-search-filter-form-near" type="text" />
             </form>
             <ul class="hero-search-filter-menu menu align-center">
             <li><a id="restaurantTab" href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurants</a></li>
@@ -71,9 +71,9 @@
 
     <!--RESTAURANT DIV-->
     <div id="resContainer">
+        <h3 id="nameOfCity"></h3>
         <div id="restaurants">
         </div>
-  
     </div>
 
 

@@ -176,7 +176,10 @@ html {
   line-height: 0em;
 }
 
-#restContainer {
-  /* padding: 20px;
-  background-color: whitesmoke; */
+#resContainer {
+  background-color: rgb(217, 234, 238);
+  padding: 30px;
+  border-radius: 25px;
+  position: relative;
+  left: -50%;
 }
