@@ -181,7 +181,7 @@ $("#restaurantTab").on("click", function(event) {
     event.preventDefault();
    
     $("#resContainer").show();
-    $("#restuarants").show();
+    $("#restaurants").show();
     $("#currContainer").hide();
     $("#forecastContainer").hide();
     $("#translateForm").hide();
@@ -210,60 +210,67 @@ var searchSettings = {
    }
 }
 
-//for loop goes here
-for ( let i = 0; i < 5; i++) {
-$.ajax(searchSettings).done(function (response) {
-    if (response.results.errors && response.results.errors.length > 0) {return}
-    else{ 
-    console.log(response);
-   console.log(response.results.data[i].name);
-   console.log(response.results.data[i].address);
-   console.log(response.results.data[i].rating);
+    //for loop goes here
+    for ( let i = 0; i < 5; i++) {
+    $.ajax(searchSettings).done(function (response) {
+        if (response.results.errors && response.results.errors.length > 0) {return}
+        else{ 
+        console.log("restaurant info" + response);
+    console.log(response.results.data[i].name);
+    console.log(response.results.data[i].address);
+    console.log(response.results.data[i].rating);
+        }
+    
+        let appendName = response.results.data[i].name;
+        let appendAddress = response.results.data[i].address;
+        let appendRating = response.results.data[i].rating;
+        $('#resInfo').append("Restuarant Name: " + appendName + "Address: " + appendAddress + "Rating: " + appendRating);
+    
+
+    });
+    //end searchSettings
+
+    //begin photoSettings
+    var photoSettings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://worldwide-restaurants.p.rapidapi.com/photos",
+    "method": "POST",
+    "headers": {
+        "x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
+        "x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
+        "content-type": "application/x-www-form-urlencoded"
+    },
+    "data": {
+        "language": "en_US",
+        "location_id": locationIdInput,
+        "currency": "USD",
+        "limit": "15"
     }
-   
+    }
 
+    $.ajax(photoSettings).done(function (response) {
+    console.log(response.results.data[i].images.small.url);
+    let image= $('<img>');
+    image.attr("src", response.results.data[i].images.small.url);
+    image.appendTo('#restaurants');
+
+
+
+    
+    });
+    //end photoSettings
+
+    };
+    //end for loop
 });
-//end searchSettings
-
-//begin photoSettings
-var photoSettings = {
-   "async": true,
-   "crossDomain": true,
-   "url": "https://worldwide-restaurants.p.rapidapi.com/photos",
-   "method": "POST",
-   "headers": {
-	   "x-rapidapi-host": "worldwide-restaurants.p.rapidapi.com",
-	   "x-rapidapi-key": "9b60481d00msh5759d44e6232b1ap1bd482jsn24bad57ab101",
-	   "content-type": "application/x-www-form-urlencoded"
-   },
-   "data": {
-	   "language": "en_US",
-	   "location_id": locationIdInput,
-	   "currency": "USD",
-	   "limit": "15"
-   }
-}
-
-$.ajax(photoSettings).done(function (response) {
-   console.log(response.results.data[i].images.small.url);
-   let image= $('<img>');
-   image.attr("src", response.results.data[i].images.small.url);
-   image.appendTo('#restaurants');
-
-
-
-   
-});
-//end photoSettings
-
-};
-//end for loop
-});
+//end function
 
 function myFunction() {
     var cityName = $("#cityName").val().trim();
     //set the city name in local storage
     localStorage.setItem('City Name', JSON.stringify(cityName));
+    console.log("city name is" + cityName);
 
 
 //variable for City Name in local storage
