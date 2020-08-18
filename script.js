@@ -1,6 +1,7 @@
 $("#currContainer").hide();
 $("#translateForm").hide();
 $("#resContainer").hide();
+$("#restuarants").hide();
 
 // WEATHER
 var forecastContainer = document.getElementById("forecastContainer");
@@ -117,7 +118,8 @@ function translateText(translateInput) {
 $("#restaurantTab").on("click", function(event) {
     event.preventDefault();
    
-	$("#restaurantTab").show();
+    $("#resContainer").show();
+    $("#restuarants").show();
 	$("#currContainer").hide();
     $("#translateForm").hide();
     
@@ -180,9 +182,9 @@ var photoSettings = {
 }
 
 $.ajax(photoSettings).done(function (response) {
-   console.log(response.results.data[0].images.small.url);
+   console.log(response.results.data[i].images.small.url);
    let image= $('<img>');
-   image.attr("src", response.results.data[0].images.small.url);
+   image.attr("src", response.results.data[i].images.small.url);
    image.appendTo('#restaurants');
 
 
