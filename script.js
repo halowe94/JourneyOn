@@ -270,12 +270,13 @@ function myFunction() {
     var cityName = $("#cityName").val().trim();
     //set the city name in local storage
     localStorage.setItem('City Name', JSON.stringify(cityName));
-    console.log("city name is" + cityName);
+    console.log("city name is " + cityName);
 
 
 //variable for City Name in local storage
 let cityInput = JSON.parse(localStorage.getItem('City Name'));
 console.log(cityInput);
+$('#nameOfCity').text(localStorage.getItem('City Name'));
 
 //Location Global Variable
 let locationID = "";
