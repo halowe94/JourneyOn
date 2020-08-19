@@ -182,6 +182,10 @@ $("#restaurantTab").on("click", function(event) {
    
     $("#resContainer").show();
     $("#restaurants").show();
+
+    $("#resInfo").empty();
+    $("#restaurants").empty();
+
     $("#currContainer").hide();
     $("#forecastContainer").hide();
     $("#translateForm").hide();
@@ -224,8 +228,8 @@ var searchSettings = {
         let appendName = response.results.data[i].name;
         let appendAddress = response.results.data[i].address;
         let appendRating = response.results.data[i].rating;
-        $('#resInfo').append("Restuarant Name: " + appendName + "Address: " + appendAddress + "Rating: " + appendRating);
-    
+        $('#resInfo').append( appendName + '  ||  ' + appendAddress + '  ||  ' + "Rating: " + appendRating);
+        $('#resInfo').append("<br>");
 
     });
     //end searchSettings
