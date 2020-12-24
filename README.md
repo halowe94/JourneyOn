@@ -34,5 +34,9 @@ Added a gradient overlay to background to make it readable
 All APIs functioning and toggleable
 App is a new experience each time it is opened
 
+## Deployed Application
+
+https://halowe94.github.io/JourneyOn/
+
 
 ![image](https://user-images.githubusercontent.com/66654999/90588012-77850280-e18f-11ea-9346-b3736856aef6.png)
